@@ -15,8 +15,22 @@ except socket.error as e:
 s.listen(2) #the number is how many people can connect
 print("Wating for a connection, server started")
 
-def threaded_client(conn):
-    pass
+def threaded_client(conn): #runs in background
+    reply = ""
+    
+    while True:
+        try:
+            data = conn.recv(2048) #larger the size, longer it takes to recieve 
+            reply = data.decode("utf-8")
+
+            if not data:
+                print("Disconnected")
+                break
+            else:
+                print("Recieved: ", reply)
+                print("Sending :", reply)
+
+            conn.sendall(str.encode(reply))            
 
 while True: #continuously listens for connections
     conn, addr = s.accept() #accepts incoming connections
