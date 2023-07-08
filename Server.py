@@ -2,7 +2,7 @@ import socket
 from _thread import *
 import sys
 
-server = ""
+server = " 192.168.0.50"
 port = 5555
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -30,7 +30,9 @@ def threaded_client(conn): #runs in background
                 print("Recieved: ", reply)
                 print("Sending :", reply)
 
-            conn.sendall(str.encode(reply))            
+            conn.sendall(str.encode(reply))
+        except:
+            break
 
 while True: #continuously listens for connections
     conn, addr = s.accept() #accepts incoming connections
