@@ -42,4 +42,4 @@ while True: #continuously listens for connections
     conn, addr = s.accept() #accepts incoming connections
     print("Connected to:", addr)
 
-    start_new_thread(threaded_client, (conn))
+    start_new_thread(threaded_client(conn))
