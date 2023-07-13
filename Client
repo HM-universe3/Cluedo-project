@@ -15,23 +15,23 @@ class Player():
     self.height = height
     self.colour = colour
     self.rect = (self.x,self.y,self.width,self.height)
-    self.vel = 0.5
+    self.velocity = 0.5
   def draw(self, WIN):
     pygame.draw.rect(WIN, self.colour, self.rect)
 
   def move(self):
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
-      self.x -= self.vel
+      self.x -= self.velocity
     
     if keys[pygame.K_RIGHT]:
-      self.x += self.vel
+      self.x += self.velocity
     
     if keys[pygame.K_UP]:
-      self.y -= self.vel
+      self.y -= self.velocity
     
     if keys[pygame.K_DOWN]:
-      self.y += self.vel
+      self.y += self.velocity
 
     self.rect = (self.x,self.y,self.width,self.height)
 
