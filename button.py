@@ -18,7 +18,7 @@ bedroom_img = pygame.image.load("button_bedroom.png").convert_alpha()
 greenhouse_img = pygame.image.load("button_greenhouse.png").convert_alpha()
 living_img = pygame.image.load("button_living-room.png").convert_alpha()
 office_img = pygame.image.load("button_office.png").convert_alpha()
-
+hall_img = pygame.image.load("button_hallway.png").convert_alpha()
 
 
 class Button:
@@ -51,11 +51,12 @@ class Button:
 #make buttons
 garage_button = Button(25, 525, garage_img, 0.7)
 dining_button = Button(20, 275, dining_img, 0.6)
-bath_button = Button(40, 150, bathroom_img, 0.7)
-bed_button = Button(20, 150, bedroom_img, 0.7)
-greenH_button = Button(550, 525, greenhouse_img, 0.7)
-living_button = Button(550, 275, living_img, 0.7)
-office_button = Button(530, 150, office_img, 0.7)
+bath_button = Button(205, 60, bathroom_img, 0.6)
+bed_button = Button(25, 60, bedroom_img, 0.7)
+greenH_button = Button(430, 500, greenhouse_img, 0.7)
+living_button = Button(430, 275, living_img, 0.7)
+office_button = Button(430, 60, office_img, 0.7)
+hall_button = Button(20, 140, hall_img, 0.7)
 
 class Garage:
   def __init__(self):
@@ -192,6 +193,30 @@ while run:
   if dining_button.draw() == True:
     DiningDisplay = DiningRoom()
     DiningDisplay.run()
+
+  if bath_button.draw() == True:
+    BathDisplay = DiningRoom()
+    BathDisplay.run()
+
+  if bed_button.draw() == True:
+    BedDisplay = DiningRoom()
+    BedDisplay.run()
+  
+  if greenH_button.draw() == True:
+    GreenDisplay = DiningRoom()
+    GreenDisplay.run()
+
+  if living_button.draw() == True:
+    livingDisplay = DiningRoom()
+    livingDisplay.run()
+
+  if office_button.draw() == True:
+    officeDisplay = DiningRoom()
+    officeDisplay.run()
+
+  if hall_button.draw() ==True:
+    hallDisplay = Hallway()
+    hallDisplay.run()
 
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
