@@ -19,6 +19,7 @@ greenhouse_img = pygame.image.load("button_greenhouse.png").convert_alpha()
 living_img = pygame.image.load("button_living-room.png").convert_alpha()
 office_img = pygame.image.load("button_office.png").convert_alpha()
 hall_img = pygame.image.load("button_hallway.png").convert_alpha()
+fountain_img = pygame.image.load("button_fountain.png").convert_alpha()
 
 
 class Button:
@@ -57,6 +58,7 @@ greenH_button = Button(430, 500, greenhouse_img, 0.7)
 living_button = Button(430, 275, living_img, 0.7)
 office_button = Button(430, 60, office_img, 0.7)
 hall_button = Button(20, 140, hall_img, 0.7)
+fountain_button = Button(235, 375, fountain_img, 0.7)
 
 class Garage:
   def __init__(self):
@@ -179,6 +181,21 @@ class GreenHouse:
         if event.type == pygame.QUIT:
           run = False
       pygame.display.update()
+
+class Fountain:
+  def __init__(self):
+    self.FountainDisplay = pygame.image.load()#insert image here
+  
+  def run(self):
+    run = True
+    while run:
+      WIN.fill((202, 228, 241))
+      WIN.blit(self.FountainDisplay, (0,0))
+
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          run = False
+      pygame.display.update()
     
 
 run = True
@@ -214,9 +231,13 @@ while run:
     officeDisplay = DiningRoom()
     officeDisplay.run()
 
-  if hall_button.draw() ==True:
+  if hall_button.draw() == True:
     hallDisplay = Hallway()
     hallDisplay.run()
+  
+  if fountain_button.draw() == True:
+    fountainDisplay = Fountain()
+    fountainDisplay.run()
 
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
