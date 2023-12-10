@@ -1,7 +1,6 @@
 import socket
 from _thread import *
 import sys
-
 server = "192.168.0.50"
 port = 5555
 
@@ -12,7 +11,7 @@ try:
 except socket.error as e:
     str(e)
 #The number is how many people can connect
-s.listen(2)
+#s.listen(2)
 print("Wating for a connection, server started")
 
 def threaded_client(conn): #runs in background
