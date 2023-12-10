@@ -8,7 +8,7 @@ class Murderer:
 
     def chooseMurdererName(self):
         self.murdererName = random.choice(self.characterlist)
-        return self.murdererName
+        
     
     def chooseMurderRoom(self):
         self.murderRoom = random.choice(self.roomList)
@@ -16,3 +16,8 @@ class Murderer:
     def chooseMurderWeapon(self):
         self.murderWeapon = random.choice(self.weaponList)
         
+characterList = ["Miss Peacock", "Colnel Mustard", "Professor Plum", "Reverand Green", "Mrs White", "Miss Scarlet"]
+roomList = ["Garage", "Bathroom", "Bedroom", "Dining room", "Fountain", "Greenhouse", "Living room", "Office"]
+weaponList = ["Lead pipe", "Rope", "Candlestick", "Revolver", "Spanner", "Dagger"]
+
+murder = Murderer(characterList, roomList, weaponList)
