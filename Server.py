@@ -43,14 +43,15 @@ def threaded_client(conn): #runs in background
 
 
 def server():
-    socket_for_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    socket_for_server.bind((host, port))
-    socket_for_server.listen()
+    socketForServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    socketForServer.bind((host, port))
+    socketForServer.listen()
 
     while True: #continuously listens for connections
-        conn, addr = socket_for_server.accept(conn, addr) #accepts incoming connections
+        conn, addr = socketForServer.accept(conn, addr) #accepts incoming connections
         clients.append(conn)
         print("Connected to:", addr)
 
         #need to start a new thread for each client that's connected
+        clientHandler
 
