@@ -9,7 +9,7 @@ pygame.display.set_caption("Client")
 clientNumber = 0
 
 class Player():
-  def __init__(self, x, y, width, height, colour):
+  def __init__(self, x, y, width, height, colour, name):
     self.x = x
     self.y = y
     self.width = width
@@ -17,6 +17,8 @@ class Player():
     self.colour = colour
     self.rect = (self.x,self.y,self.width,self.height)
     self.velocity = 0.5
+    self.name = name
+    self.inventory = []
   def draw(self, WIN):
     pygame.draw.rect(WIN, self.colour, self.rect)
 
@@ -35,6 +37,22 @@ class Player():
       self.y += self.velocity
 
     self.rect = (self.x,self.y,self.width,self.height)
+
+  def pickUpItem(self, item):
+    self.inventory.append(item)
+    print(f"{self.name} picked up {item.name}")
+
+
+  def viewInventory(self):
+    if self.inventory:
+      print(f"{self.name}'s Inventory")
+      for item in self.inventory:
+        print(item.name) #only prints the name, need to figure ou how to also display the card
+
+    else:
+      print(f"{self.name}'s inventory is empty")
+
+
 
 
 
