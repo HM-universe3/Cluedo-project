@@ -52,6 +52,15 @@ class Player():
     else:
       print(f"{self.name}'s inventory is empty")
 
+class Card:
+  def __init__(self, cardName, cardImage):
+    self.name = cardName
+    self.imagePath = str(cardImage).jpg
+    self.image = pygame.image.load(self.imagePath)
+    #inventoryOpen = False
+    #while inventoryOpen != False:
+    #WIN.blit(self.image, (0, 0))
+    #pygame.display.flip()
 
 
 
