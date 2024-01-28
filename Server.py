@@ -1,5 +1,6 @@
 import socket
 from _thread import *
+import threading
 import sys
 host = "192.168.0.50"
 port = 55555
@@ -53,5 +54,5 @@ def server():
         print("Connected to:", addr)
 
         #need to start a new thread for each client that's connected
-        clientHandler
+        clientHandler = threading.Thread(target=threaded_client, args=(conn,))
 
