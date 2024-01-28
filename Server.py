@@ -2,23 +2,15 @@ import socket
 from _thread import *
 import threading
 import sys
-host = "192.168.0.50"
-port = 55555
 
 
-clients = []
+HOST = "192.168.0.50"
+PORT = 55555
 
-try:
-    s.bind((server, port))
-except socket.error as e:
-    str(e)
-#The number is how many people can connect
-#s.listen(2)
-print("Wating for a connection, server started")
+clients = [] #to hold which clients are connected
 
 def threaded_client(conn): #runs in background
     conn.send(str.encode("Connected"))
-    reply = ""
     
     while True:
         try:
@@ -45,7 +37,7 @@ def threaded_client(conn): #runs in background
 
 def server():
     socketForServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    socketForServer.bind((host, port))
+    socketForServer.bind((HOST, PORT))
     socketForServer.listen()
 
     while True: #continuously listens for connections
@@ -55,4 +47,9 @@ def server():
 
         #need to start a new thread for each client that's connected
         clientHandler = threading.Thread(target=threaded_client, args=(conn,))
+        clientHandler.start()
+
+
+if __name__ == "__main__":
+    server()
 
