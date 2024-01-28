@@ -1,10 +1,11 @@
 import socket
 from _thread import *
 import sys
-server = "192.168.0.50"
-port = 5555
+host = "192.168.0.50"
+port = 55555
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+clients = []
 
 try:
     s.bind((server, port))
@@ -20,25 +21,36 @@ def threaded_client(conn): #runs in background
     
     while True:
         try:
-            data = conn.recv(2048) #larger the size, longer it takes to recieve 
-            reply = data.decode("utf-8")
+            #this receives the data from the client
+            data = conn.recv(1024) #larger the size, longer it takes to recieve 
 
             if not data:
                 print("Disconnected")
                 break
-            else:
-                print("Recieved: ", reply)
-                print("Sending :", reply)
-
-            conn.sendall(str.encode(reply))
+            
+            for client in clients:
+                if client != conn:
+                    try:
+                        client.send(data)
+                    except:
+                        clients.remove(client)
         except:
             break
-
+    
+    clients.remove(conn)
     print("Lost connection")
     conn.close()
 
-while True: #continuously listens for connections
-    conn, addr = s.accept(conn, addr) #accepts incoming connections
-    print("Connected to:", addr)
 
-    start_new_thread(threaded_client(conn))
+def server():
+    socket_for_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    socket_for_server.bind((host, port))
+    socket_for_server.listen()
+
+    while True: #continuously listens for connections
+        conn, addr = socket_for_server.accept(conn, addr) #accepts incoming connections
+        clients.append(conn)
+        print("Connected to:", addr)
+
+        #need to start a new thread for each client that's connected
+
