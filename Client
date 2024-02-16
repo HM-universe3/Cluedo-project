@@ -75,8 +75,8 @@ def redrawWindow(WIN, player):
 
 
 def main():
-  background = pygame.image.load("Cluedo_map.png")
-  background = pygame.transform.scale(background, (width * 2, height * 2))
+  #background = pygame.image.load("Cluedo map.png")
+  #background = pygame.transform.scale(background, (width * 2, height * 2))
   run = True
   p = Player(50, 50, 100, 100, (0, 255, 0), "Player 1")
   while run:
@@ -87,14 +87,13 @@ def main():
     p.move()
     redrawWindow(WIN, p)
 
+    #backGroundOffset_x = -p.x + width // 2
+    #backGroundOffset_y = -p.y + height // 2
 
-    backGroundOffset_x = -p.x + width // 2
-    backGroundOffset_y = -p.y + height // 2
+    #WIN.blit(background, (backGroundOffset_x, backGroundOffset_y))
 
-    WIN.blit(background, (backGroundOffset_x, backGroundOffset_y))
-
-    pygame.display.update()
-    pygame.time.Clock().tick(30)
+    #pygame.display.update()
+    #pygame.time.Clock().tick(60)
 main()
 
 pygame.quit()
