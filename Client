@@ -1,6 +1,8 @@
 import pygame
 import sys
 
+pygame.init()
+
 width = 500
 height = 500
 WIN = pygame.display.set_mode((width, height))
@@ -24,16 +26,16 @@ class Player():
 
   def move(self):
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
       self.x -= self.velocity
     
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
       self.x += self.velocity
     
-    if keys[pygame.K_UP]:
+    if keys[pygame.K_UP] or keys[pygame.K_w]:
       self.y -= self.velocity
     
-    if keys[pygame.K_DOWN]:
+    if keys[pygame.K_DOWN] or keys[pygame.K_s]:
       self.y += self.velocity
 
     self.rect = (self.x,self.y,self.width,self.height)
@@ -74,7 +76,7 @@ def redrawWindow(WIN, player):
 
 def main():
   run = True
-  p = Player(50, 50, 100, 100, (0, 255, 0))
+  p = Player(50, 50, 100, 100, (0, 255, 0), "Player 1")
   while run:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
