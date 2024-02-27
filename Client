@@ -54,15 +54,10 @@ class Player():
     else:
       print(f"{self.name}'s inventory is empty")
 
+
 class Card:
-  def __init__(self, cardName, cardImage):
+  def __init__(self, cardName):
     self.name = cardName
-    self.imagePath = str(cardImage).jpg
-    self.image = pygame.image.load(self.imagePath)
-    #inventoryOpen = False
-    #while inventoryOpen != False:
-    #WIN.blit(self.image, (0, 0))
-    #pygame.display.flip()
 
 
 
@@ -79,6 +74,10 @@ def main():
   #background = pygame.transform.scale(background, (width * 2, height * 2))
   run = True
   p = Player(50, 50, 100, 100, (0, 255, 0), "Player 1")
+  with open("CardList.txt") as file:
+    cardsNotFound = [line.rstrip() for line in file]
+  for i in cardsNotFound:
+    i = Card(i)
   while run:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
@@ -86,6 +85,11 @@ def main():
         pygame.quit()
     p.move()
     redrawWindow(WIN, p)
+    if p.distance(Card) < 15:
+      p.self.inventory.append(Card)
+      cardsNotFound.remove(Card.self.name)
+
+
 
     #backGroundOffset_x = -p.x + width // 2
     #backGroundOffset_y = -p.y + height // 2
