@@ -77,7 +77,8 @@ class Garage:
 
 class DiningRoom:
   def __init__(self):
-    self.DiningRoomDisplay = pygame.image.load()#insert image here
+    self.DiningRoomDisplay = pygame.image.load("Dining room image.png")#insert image here
+    self.DiningRoomDisplay = pygame.transform.scale(self.DiningRoomDisplay, (600, 600))
   
   def run(self):
     run = True
@@ -108,7 +109,8 @@ class Bedroom:
   
 class Hallway:
   def __init__(self):
-    self.HallwayDisplay = pygame.image.load()#insert image here
+    self.HallwayDisplay = pygame.image.load("Hallway image.png")#insert image here
+    self.HallwayDisplay = pygame.transform.scale(self.HallwayDisplay, (600, 600))
   
   def run(self):
     run = True
@@ -123,8 +125,8 @@ class Hallway:
 
 class Office:
   def __init__(self):
-    self.OfficeDisplay = pygame.image.load()#insert image here
-  
+    self.OfficeDisplay = pygame.image.load("Office image.png")#insert image here
+    self.OfficeDisplay = pygame.transform.scale(self.OfficeDisplay, (600, 600))
   def run(self):
     run = True
     while run:
@@ -154,8 +156,8 @@ class Bathroom:
 
 class LivingRoom:
   def __init__(self):
-    self.LivingRoomDisplay = pygame.image.load()#insert image here
-  
+    self.LivingRoomDisplay = pygame.image.load("Living room image.png")#insert image here
+    self.LivingRoomDisplay = pygame.transform.scale(self.LivingRoomDisplay, (600, 600))
   def run(self):
     run = True
     while run:
@@ -169,8 +171,8 @@ class LivingRoom:
 
 class GreenHouse:
   def __init__(self):
-    self.GreenHouseDisplay = pygame.image.load()#insert image here
-  
+    self.GreenHouseDisplay = pygame.image.load("Greenhouse image.png")#insert image here
+    self.GreenHouseDisplay = pygame.transform.scale(self.GreenHouseDisplay, (600, 600))
   def run(self):
     run = True
     while run:
