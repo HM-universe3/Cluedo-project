@@ -214,23 +214,23 @@ while run:
     DiningDisplay.run()
 
   if bath_button.draw() == True:
-    BathDisplay = DiningRoom()
+    BathDisplay = Bathroom()
     BathDisplay.run()
 
   if bed_button.draw() == True:
-    BedDisplay = DiningRoom()
+    BedDisplay = Bedroom()
     BedDisplay.run()
   
   if greenH_button.draw() == True:
-    GreenDisplay = DiningRoom()
+    GreenDisplay = GreenHouse()
     GreenDisplay.run()
 
   if living_button.draw() == True:
-    livingDisplay = DiningRoom()
+    livingDisplay = LivingRoom()
     livingDisplay.run()
 
   if office_button.draw() == True:
-    officeDisplay = DiningRoom()
+    officeDisplay = Office()
     officeDisplay.run()
 
   if hall_button.draw() == True:
