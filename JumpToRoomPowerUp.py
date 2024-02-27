@@ -62,7 +62,7 @@ fountain_button = Button(235, 375, fountain_img, 0.7)
 
 class Garage:
   def __init__(self):
-    self.garageDisplay = pygame.image.load("MC_floorplan_test.jpg").convert_alpha()
+    self.garageDisplay = pygame.image.load("Garage image.png").convert_alpha()
     self.garageDisplay = pygame.transform.scale(self.garageDisplay, (600, 600))
   def run(self):
     run = True
@@ -93,8 +93,8 @@ class DiningRoom:
 
 class Bedroom:
   def __init__(self):
-    self.BedroomDisplay = pygame.image.load()#insert image here
-  
+    self.BedroomDisplay = pygame.image.load("Bedroom image.png")#insert image here
+    self.BedroomDisplay = pygame.transform.scale(self.BedroomDisplay, (600, 600))
   def run(self):
     run = True
     while run:
@@ -139,8 +139,8 @@ class Office:
   
 class Bathroom:
   def __init__(self):
-    self.BathroomDisplay = pygame.image.load()#insert image here
-  
+    self.BathroomDisplay = pygame.image.load("Bathroom image.png")#insert image here
+    self.BathroomDisplay = pygame.transform.scale(self.BathroomDisplay, (600, 600))
   def run(self):
     run = True
     while run:
@@ -184,8 +184,8 @@ class GreenHouse:
 
 class Fountain:
   def __init__(self):
-    self.FountainDisplay = pygame.image.load()#insert image here
-  
+    self.FountainDisplay = pygame.image.load("Fountain image.png")#insert image here
+    self.FountainDisplay = pygame.transform.scale(self.FountainDisplay, (600, 600))
   def run(self):
     run = True
     while run:

@@ -49,7 +49,7 @@ class Player():
     if self.inventory:
       print(f"{self.name}'s Inventory")
       for item in self.inventory:
-        print(item.name) #only prints the name, need to figure ou how to also display the card
+        print(item.name) #only prints the name
 
     else:
       print(f"{self.name}'s inventory is empty")
@@ -58,7 +58,21 @@ class Player():
 class Card:
   def __init__(self, cardName):
     self.name = cardName
+  
+  def draw(self):
+    action = False
+    #get mouse position
+    pos = pygame.mouse.get_pos()
+    #check mouseover and clicked conditions
+    if self.rect.collidepoint(pos):
+      if pygame.mouse.get_pressed()[0] == 1 and self.click == False:
+        self.click = True
+        action = True
+    if pygame.mouse.get_pressed()[0] == 0:
+      self.click = False
 
+    WIN.blit(self.image, (self.rect.x, self.rect.y))
+    return action
 
 
 
@@ -85,9 +99,7 @@ def main():
         pygame.quit()
     p.move()
     redrawWindow(WIN, p)
-    if p.distance(Card) < 15:
-      p.self.inventory.append(Card)
-      cardsNotFound.remove(Card.self.name)
+
 
 
 
