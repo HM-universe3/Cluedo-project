@@ -1,10 +1,9 @@
 import pygame
 import sys
-import JumpToRoomPowerUp
 pygame.init()
 
-width = 500
-height = 500
+width = 600
+height = 600
 WIN = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Client")
 
@@ -74,17 +73,18 @@ class Card:
     WIN.blit(self.image, (self.rect.x, self.rect.y))
     return action
 
-
+#MainBackground = pygame.image.load("Fountain image.png")
 
 def redrawWindow(WIN, player):
-  WIN.fill((255, 255, 255))
+  MainBackground = pygame.image.load("Fountain image.png")
+  MainBackground = pygame.transform.scale(MainBackground, (width, height))
+  WIN.blit(MainBackground, (0, 0))
   player.draw(WIN)
   pygame.display.update()
 
 
 
 def main():
-  #background = pygame.image.load("Cluedo map.png")
   #background = pygame.transform.scale(background, (width * 2, height * 2))
   run = True
   p = Player(50, 50, 100, 100, (0, 255, 0), "Player 1")
@@ -100,16 +100,8 @@ def main():
     p.move()
     redrawWindow(WIN, p)
 
-
-
-
-    #backGroundOffset_x = -p.x + width // 2
-    #backGroundOffset_y = -p.y + height // 2
-
-    #WIN.blit(background, (backGroundOffset_x, backGroundOffset_y))
-
-    #pygame.display.update()
-    #pygame.time.Clock().tick(60)
+    pygame.display.update()
+    pygame.time.Clock().tick(450)
 main()
 
 pygame.quit()
