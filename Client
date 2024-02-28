@@ -1,5 +1,8 @@
 import pygame
+from pygame.locals import Rect
+import random
 import sys
+
 pygame.init()
 # import Network
 # import Server
@@ -29,13 +32,13 @@ class Player():
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] or keys[pygame.K_a]:
       self.x -= self.velocity
-    
+
     if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
       self.x += self.velocity
-    
+
     if keys[pygame.K_UP] or keys[pygame.K_w]:
       self.y -= self.velocity
-    
+
     if keys[pygame.K_DOWN] or keys[pygame.K_s]:
       self.y += self.velocity
 
@@ -56,24 +59,21 @@ class Player():
       print(f"{self.name}'s inventory is empty")
 
 
-class Card:
+class Card(Player):
   def __init__(self, cardName):
     self.name = cardName
-  
-  def draw(self):
-    action = False
-    #get mouse position
-    pos = pygame.mouse.get_pos()
-    #check mouseover and clicked conditions
-    if self.rect.collidepoint(pos):
-      if pygame.mouse.get_pressed()[0] == 1 and self.click == False:
-        self.click = True
-        action = True
-    if pygame.mouse.get_pressed()[0] == 0:
-      self.click = False
+    self.x = 60
+    self.y = 60
+    self.width = 50
+    self.height = 70
+    self.colour = (139, 0, 0)
+    self.rect = (self.x, self.y, self.width, self.height)
+    
 
-    WIN.blit(self.image, (self.rect.x, self.rect.y))
-    return action
+  def draw(self, WIN):
+    pygame.draw.rect(WIN, self.colour, self.rect)
+    
+
 
 #MainBackground = pygame.image.load("Fountain image.png")
 
@@ -104,7 +104,17 @@ def main():
       #WIN.
       #need to find background x and y values and speed and then use background x - background speed to update it as the player hits the edge of the screen
       #pass
+    Fountain = Card("Fountain")
+    Fountain.draw(WIN)
     redrawWindow(WIN, p)
+    player_rect = Rect(p.rect)
+    Fountain_rect = Rect(Fountain.rect)
+    redrawWindow(WIN, Fountain)
+    if player_rect.colliderect(Fountain_rect):
+      p.inventory.append(Fountain)
+      #cardsNotFound.remove(Fountain.name)
+      
+      
 
     pygame.display.update()
     pygame.time.Clock().tick(450)
