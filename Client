@@ -110,7 +110,7 @@ def main():
     player_rect = Rect(p.rect)
     Fountain_rect = Rect(Fountain.rect)
     redrawWindow(WIN, Fountain)
-    if player_rect.colliderect(Fountain_rect):
+    if player_rect.pygame.colliderect(Fountain_rect):
       p.inventory.append(Fountain)
       #cardsNotFound.remove(Fountain.name)
       
