@@ -73,6 +73,7 @@ class Card(Player):
   def draw(self, WIN):
     pygame.draw.rect(WIN, self.colour, self.rect)
     
+    
 
 
 #MainBackground = pygame.image.load("Fountain image.png")
@@ -90,10 +91,25 @@ def main():
   #background = pygame.transform.scale(background, (width * 2, height * 2))
   run = True
   p = Player(50, 50, 50, 50, (0, 255, 0), "Player 1")
+  cardsNotFound = []
+  cardObjects = []
+  cardsForRoom = []
   with open("CardList.txt") as file:
     cardsNotFound = [line.rstrip() for line in file]
-  for i in cardsNotFound:
-    i = Card(i)
+    for line in file:
+      card_name = line.strip()
+      card_object = Card(card_name)
+      cardObjects.append(card_object)
+
+  for i in range(3):
+    randomX = random.randint(0, width - 50) #makes sure the card is actually in the window
+    randomY = random.randint(0, height - 70)
+    card_object = Card(f"Card {i + 1}")
+    card_object.x = randomX
+    card_object.y = randomY
+    cardsForRoom.append(card_object)
+    
+    
   while run:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
@@ -109,11 +125,11 @@ def main():
     redrawWindow(WIN, p)
     player_rect = Rect(p.rect)
     Fountain_rect = Rect(Fountain.rect)
-    redrawWindow(WIN, Fountain)
-    if player_rect.pygame.colliderect(Fountain_rect):
+    if player_rect.colliderect(Fountain_rect):
       p.inventory.append(Fountain)
       #cardsNotFound.remove(Fountain.name)
-      
+    for card_object in cardsForRoom:
+      card_object.draw(WIN)
       
 
     pygame.display.update()
