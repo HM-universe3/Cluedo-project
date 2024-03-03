@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import Rect
 import random
 import sys
-import Server
+#import Server
 import pickle
 
 pygame.init()
@@ -97,8 +97,8 @@ def redrawWindow(WIN, player):
 
 
 def main():
-  #background = pygame.transform.scale(background, (width * 2, height * 2))
-  run = True
+  client = Client()
+  client.connect()
   p = Player(50, 50, 50, 50, (0, 255, 0), "Player 1")
   cardsNotFound = []
   cardObjects = []
@@ -125,6 +125,10 @@ def main():
         run = False
         pygame.quit()
     p.move()
+    client.sendPosition()
+    otherPlayersPositions = client.receivePositions()
+    for playerPosition in otherPlayersPositions:
+      p.updatePosition(playerPosition)
     #if p.self.x < 0 or p.self.x > width - p.self.rect or p.self.y < 0 or p.self.y > height - p.self.rect:
       #WIN.
       #need to find background x and y values and speed and then use background x - background speed to update it as the player hits the edge of the screen
@@ -145,5 +149,6 @@ def main():
     pygame.time.Clock().tick(450)
 main()
 
+client.close()
 pygame.quit()
 sys.exit()
