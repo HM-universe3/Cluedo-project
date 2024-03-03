@@ -14,7 +14,7 @@ width = 600
 height = 600
 WIN = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Client")
-
+listOfColours = [(0, 255, 0), ()]
 clientNumber = 0
 
 class Player():
@@ -196,13 +196,43 @@ class Client:
     def close(self):
         self.client_socket.close()
 
+class Murderer:
+    def __init__(self, characterList, roomList, weaponList):
+        self.characterlist = characterList
+        self.roomList = roomList
+        self.weaponList = weaponList
+
+    def chooseMurdererName(self):
+        self.murdererName = random.choice(self.characterlist)
+        
+    
+    def chooseMurderRoom(self):
+        self.murderRoom = random.choice(self.roomList)
+    
+    def chooseMurderWeapon(self):
+        self.murderWeapon = random.choice(self.weaponList)
+    
+    def revealMurderer(self):
+        print(f"It was {self.murdererName} in the {self.murderRoom} with the {self.murderWeapon}")
+
+characterList = ["Mrs White", "Miss Scarlet", "Miss Peacock", "Professor Plum", "Colnel Mustard", "Reverand Green"]
+roomList = ["Garage", "Dining Room", "Bathroom", "Conservatory", "Bedroom", "Study", "Fountain", "Living Room"]
+weaponList = ["Lead Pipe", "Rope", "Candlestick", "Revolver", "Spanner", "Dagger"]
+
 def main():
   client = Client()
   client.connect()
-  p = Player(50, 50, 50, 50, (0, 255, 0), "Player 1")
+  p = Player(50, 50, 50, 50, random.choice(listOfColours), "Player 1")
   cardsNotFound = []
   cardObjects = []
   cardsForRoom = []
+  murder = Murderer(characterList, roomList, weaponList)
+  murder.chooseMurdererName()
+  murder.chooseMurderRoom()
+  murder.chooseMurderWeapon()
+  cardsNotFound.remove(murder.self.murdererName)
+  cardsNotFound.remove(murder.self.murderRoom)
+  cardsNotFound.remove(murder.self.murderWeapon)
   with open("CardList.txt") as file:
     cardsNotFound = [line.rstrip() for line in file]
     for line in file:

@@ -15,9 +15,16 @@ class Murderer:
     
     def chooseMurderWeapon(self):
         self.murderWeapon = random.choice(self.weaponList)
-        
-characterList = ["Miss Peacock", "Colnel Mustard", "Professor Plum", "Reverand Green", "Mrs White", "Miss Scarlet"]
-roomList = ["Garage", "Bathroom", "Bedroom", "Dining room", "Fountain", "Greenhouse", "Living room", "Office"]
-weaponList = ["Lead pipe", "Rope", "Candlestick", "Revolver", "Spanner", "Dagger"]
+    
+    def revealMurderer(self):
+        print(f"It was {self.murdererName} in the {self.murderRoom} with the {self.murderWeapon}")
+
+characterList = ["Mrs White", "Miss Scarlet", "Miss Peacock", "Professor Plum", "Colnel Mustard", "Reverand Green"]
+roomList = ["Garage", "Dining Room", "Bathroom", "Conservatory", "Bedroom", "Study", "Fountain", "Living Room"]
+weaponList = ["Lead Pipe", "Rope", "Candlestick", "Revolver", "Spanner", "Dagger"]
 
 murder = Murderer(characterList, roomList, weaponList)
+murder.chooseMurdererName()
+murder.chooseMurderRoom()
+murder.chooseMurderWeapon()
+murder.revealMurderer()
