@@ -1,8 +1,10 @@
 import pygame
 from pygame.locals import Rect
 import random
+import socket
+from _thread import *
+import threading
 import sys
-#import Server
 import pickle
 
 pygame.init()
@@ -94,7 +96,105 @@ def redrawWindow(WIN, player):
   player.draw(WIN)
   pygame.display.update()
 
+class Network:
+    def __init__(self):
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server = "192.168.0.50"
+        self.port = 5555
+        self.addr = (self.server, self.port)
+        self.id = self.connect()
+        print(self.id)
 
+
+    def connect(self):
+        try:
+            self.client.connect(self.addr)
+            return self.client.recv(2048).decode()
+        except:
+            pass
+    def send(self, data):
+        try:
+            self.client.send(str.encode(data))
+            return self.client.recv(2048).decode()
+        except socket.error as e:
+            print(e)
+
+n = Network()
+print(n.send("Hello"))
+print(n.send("Working"))
+
+HOST = "192.168.0.50"
+PORT = 55555
+
+clients = [] #to hold which clients are connected
+
+def threaded_client(conn): #runs in background
+    conn.send(str.encode("Connected"))
+    
+    while True:
+        try:
+            #this receives the data from the client
+            data = conn.recv(2048) #larger the size, longer it takes to recieve 
+
+            if not data:
+                print("Disconnected")
+                break
+            
+            for client in clients:
+                if client != conn:
+                    try:
+                        client.send(data)
+                    except:
+                        clients.remove(client)
+        except:
+            break
+    
+    clients.remove(conn)
+    print("Lost connection")
+    conn.close()
+
+
+def server():
+    socketForServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    socketForServer.bind((HOST, PORT))
+    socketForServer.listen()
+
+    while True: #continuously listens for connections
+        conn, addr = socketForServer.accept(conn, addr) #accepts incoming connections
+        clients.append(conn)
+        print("Connected to:", addr)
+
+        #need to start a new thread for each client that's connected
+        clientHandler = threading.Thread(target=threaded_client, args=(conn,))
+        clientHandler.start()
+
+
+if __name__ == "__main__":
+    server()
+
+class Client:
+    def __init__(self):
+        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.host = "192.168.0.50"
+        self.port = 55555
+        self.address = (self.host, self.port)
+        self.player = None
+
+    def connect(self):
+        self.client_socket.connect(self.address)
+        #this receives inital data from the server when it connects
+        print(self.clien_socket.recv(2048).decode())
+
+    def sendPosition(self):
+        if self.player:
+            self.player.send_position(self.client_socket)
+        
+    def receivePositions(self):
+        if self.player:
+            return self.player.receive_position(self.client_socket)
+    
+    def close(self):
+        self.client_socket.close()
 
 def main():
   client = Client()
@@ -147,8 +247,9 @@ def main():
 
     pygame.display.update()
     pygame.time.Clock().tick(450)
+    client.close()
 main()
 
-client.close()
+
 pygame.quit()
 sys.exit()
