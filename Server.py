@@ -2,7 +2,7 @@ import socket
 from _thread import *
 import threading
 import sys
-
+import pickle
 
 HOST = "192.168.0.50"
 PORT = 55555
@@ -15,7 +15,7 @@ def threaded_client(conn): #runs in background
     while True:
         try:
             #this receives the data from the client
-            data = conn.recv(1024) #larger the size, longer it takes to recieve 
+            data = conn.recv(2048) #larger the size, longer it takes to recieve 
 
             if not data:
                 print("Disconnected")
@@ -53,3 +53,26 @@ def server():
 if __name__ == "__main__":
     server()
 
+class Client:
+    def __init__(self):
+        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.host = "192.168.0.50"
+        self.port = 55555
+        self.address = (self.host, self.port)
+        self.player = None
+
+    def connect(self):
+        self.client_socket.connect(self.address)
+        #this receives inital data from the server when it connects
+        print(self.clien_socket.recv(2048).decode())
+
+    def sendPosition(self):
+        if self.player:
+            self.player.send_position(self.client_socket)
+        
+    def receivePositions(self):
+        if self.player:
+            return self.player.receive_position(self.client_socket)
+    
+    def close(self):
+        self.client_socket.close()
