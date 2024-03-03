@@ -248,7 +248,7 @@ def main():
     card_object.y = randomY
     cardsForRoom.append(card_object)
     
-    
+  run = True
   while run:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
