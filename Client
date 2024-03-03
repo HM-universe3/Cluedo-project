@@ -6,7 +6,10 @@ from _thread import *
 import threading
 import sys
 import pickle
-import Server
+from Server import Client
+from Murderer_class import Murderer
+from Network import n
+from Server import Server
 
 
 pygame.init()
@@ -97,26 +100,6 @@ def redrawWindow(WIN, player):
   WIN.blit(MainBackground, (0, 0))
   player.draw(WIN)
   pygame.display.update()
-
-
-class Murderer:
-    def __init__(self, characterList, roomList, weaponList):
-        self.characterlist = characterList
-        self.roomList = roomList
-        self.weaponList = weaponList
-
-    def chooseMurdererName(self):
-        self.murdererName = random.choice(self.characterlist)
-        
-    
-    def chooseMurderRoom(self):
-        self.murderRoom = random.choice(self.roomList)
-    
-    def chooseMurderWeapon(self):
-        self.murderWeapon = random.choice(self.weaponList)
-    
-    def revealMurderer(self):
-        print(f"It was {self.murdererName} in the {self.murderRoom} with the {self.murderWeapon}")
 
 characterList = ["Mrs White", "Miss Scarlet", "Miss Peacock", "Professor Plum", "Colnel Mustard", "Reverand Green"]
 roomList = ["Garage", "Dining Room", "Bathroom", "Conservatory", "Bedroom", "Study", "Fountain", "Living Room"]
