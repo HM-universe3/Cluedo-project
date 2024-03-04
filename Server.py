@@ -7,8 +7,11 @@ from Network import Network
 
 HOST = "192.168.0.50"
 PORT = 55555
-
-clients = [] #to hold which clients are connected
+try: s.bond((HOST, PORT))
+except socket.error as e:
+    str(e)
+s.listn(6)
+clients = [] 
 
 class Server:
 
