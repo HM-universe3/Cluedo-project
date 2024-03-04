@@ -9,6 +9,7 @@ import pickle
 from Server import Client
 from Murderer_class import Murderer
 from Server import Server
+from Network import Network
 n = Network()
 print(n.send("Hello"))
 print(n.send("Working"))
