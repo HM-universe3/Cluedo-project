@@ -8,9 +8,10 @@ import sys
 import pickle
 from Server import Client
 from Murderer_class import Murderer
-from Network import n
 from Server import Server
-
+n = Network()
+print(n.send("Hello"))
+print(n.send("Working"))
 
 pygame.init()
 
