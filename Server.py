@@ -7,10 +7,7 @@ from Network import Network
 
 HOST = "192.168.0.50"
 PORT = 55555
-try: s.bond((HOST, PORT))
-except socket.error as e:
-    str(e)
-s.listn(6)
+
 clients = [] 
 
 class Server:
@@ -41,7 +38,7 @@ class Server:
         conn.close()
 
 
-    def server():
+    def server(threaded_client):
         socketForServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         socketForServer.bind((HOST, PORT))
         socketForServer.listen()
