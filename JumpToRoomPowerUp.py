@@ -10,7 +10,6 @@ cluedoBoard = pygame.transform.scale(cluedoMap, (600, 600))
 mouse = pygame.mouse.get_pos()
 
 
-#load button images
 garage_img = pygame.image.load("garage_button.png").convert_alpha()
 dining_img = pygame.image.load("button_dining-room.png").convert_alpha()
 bathroom_img = pygame.image.load("button_bathroom.png").convert_alpha()
