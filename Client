@@ -10,6 +10,15 @@ from Server import Client
 from Murderer_class import Murderer
 from Server import Server
 from Network import Network
+
+HOST = "192.168.0.50"
+PORT = 55555
+try: s.bond((HOST, PORT))
+except socket.error as e:
+    str(e)
+s.listn(6)
+clients = [] 
+
 n = Network()
 print(n.send("Hello"))
 print(n.send("Working"))
