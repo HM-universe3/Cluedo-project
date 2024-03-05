@@ -71,15 +71,17 @@ class Client:
 
     def connect(self):
         self.clientSocket.connect(self.address)
-        print(self.clientSocket.recv(2048).decode())
+        print(self.clientSocket.recv(1048).decode())
 
     def sendPosition(self):
+        data = self.player.send_position(self.clientSocket)
         if self.player:
-            self.player.send_position(self.clientSocket)
+            self.player.sendall(data)
         
     def receivePositions(self):
+        data = self.player.receive_position(self.clientSocket)
         if self.player:
-            return self.player.receive_position(self.clientSocket)
+            return self.player.recv(data)
     
     def close(self):
         self.clientSocket.close()

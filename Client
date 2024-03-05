@@ -1,29 +1,29 @@
 import pygame
 from pygame.locals import Rect
 import random
-import socket
+#import socket
 from _thread import *
 from threading import *
 import sys
 import pickle
-from Server import Client, ServerClass
+#from Server import Client, ServerClass
 from Murderer_class import Murderer
-from Network import Network
+#from Network import Network
 from JumpToRoomPowerUp import Button
 from JumpToRoomPowerUp import Garage, DiningRoom, Bedroom, Hallway, Office, Bathroom, LivingRoom, GreenHouse, Fountain, JumpToRoom
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-HOST = "192.168.0.50"
-PORT = 55555
-try: s.bind((HOST, PORT))
-except socket.error as e:
-    str(e)
+# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# HOST = "192.168.0.50"
+# PORT = 55555
+# try: s.bind((HOST, PORT))
+# except socket.error as e:
+#     str(e)
 
 clients = [] 
 
-n = Network()
-print(n.send("Hello"))
-print(n.send("Working"))
+# n = Network()
+# print(n.send("Hello"))
+# print(n.send("Working"))
 
 pygame.init()
 
@@ -111,14 +111,14 @@ class Player():
   def draw(self, WIN):
     pygame.draw.rect(WIN, self.colour, self.rect)
 
-  def sendPosition(self, client_socket):
-    positionData = pickle.dumps((self.x, self.y)) #player's position data
-    client_socket.send(positionData)
+  # def sendPosition(self, client_socket):
+  #   positionData = pickle.dumps((self.x, self.y)) #player's position data
+  #   client_socket.send(positionData)
 
-  def receivePositions(self, client_socket):
-    serverData = client_socket.recv(1024)
-    positions = pickle.loads(serverData)
-    return positions
+  # def receivePositions(self, client_socket):
+  #   serverData = client_socket.recv(1024)
+  #   positions = pickle.loads(serverData)
+  #   return positions
   def move(self):
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] or keys[pygame.K_a]:
@@ -177,25 +177,28 @@ characterList = ["Mrs White", "Miss Scarlet", "Miss Peacock", "Professor Plum", 
 roomList = ["Garage", "Dining Room", "Bathroom", "Conservatory", "Bedroom", "Study", "Fountain", "Living Room"]
 weaponList = ["Lead Pipe", "Rope", "Candlestick", "Revolver", "Spanner", "Dagger"]
 
+# socketForServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# socketForServer.connect((HOST, PORT))
+# socketForServer.listen()
+# conn, addr = socketForServer.accept()
 def main():
-
-  p = Player(50, 50, 50, 50, random.choice(listOfColours), "Player 1")
+  p = Player(50, 50, 50, 50, (0, 255, 0) , "Player 1")
   cardsNotFound = []
   cardObjects = []
   cardsForRoom = []
-  murder = Murderer(characterList, roomList, weaponList)
-  murder.chooseMurdererName()
-  murder.chooseMurderRoom()
-  murder.chooseMurderWeapon()
-  cardsNotFound.remove(murder.self.murdererName)
-  cardsNotFound.remove(murder.self.murderRoom)
-  cardsNotFound.remove(murder.self.murderWeapon)
   with open("CardList.txt") as file:
     cardsNotFound = [line.rstrip() for line in file]
     for line in file:
       card_name = line.strip()
       card_object = Card(card_name)
       cardObjects.append(card_object)
+  # murder = Murderer(characterList, roomList, weaponList)
+  # murder.chooseMurdererName()
+  # murder.chooseMurderRoom()
+  # murder.chooseMurderWeapon()
+  # cardsNotFound.remove(murder.murdererName)
+  # cardsNotFound.remove(murder.murderRoom)
+  # cardsNotFound.remove(murder.murderWeapon)
 
   for i in range(3):
     randomX = random.randint(0, width - 50) #makes sure the card is actually in the window
@@ -207,11 +210,11 @@ def main():
     
   run = True
   while run:
-    client = Client()
-    ServerClass.threaded_client(conn)
-    ServerClass.server()
-    client.connect()
-    client.sendPosition()
+    # client = Client()
+    # ServerClass.threaded_client(conn)
+    # ServerClass.server()
+    # client.connect()
+    # client.sendPosition()
     if checkListButton.draw() == True:
       checkListDisplay = CheckList()
       checkListDisplay.run()
@@ -225,10 +228,10 @@ def main():
         run = False
 
     p.move()
-    client.sendPosition()
-    otherPlayersPositions = client.receivePositions()
-    for playerPosition in otherPlayersPositions:
-      p.updatePosition(playerPosition)
+    #client.sendPosition()
+    #otherPlayersPositions = client.receivePositions()
+    #for playerPosition in otherPlayersPositions:
+      #p.updatePosition(playerPosition)
     Fountain = Card("Fountain")
     Fountain.draw(WIN)
     redrawWindow(WIN, p)
@@ -243,7 +246,7 @@ def main():
 
     pygame.display.update()
     pygame.time.Clock().tick(450)
-    client.close()
+    #client.close()
 main()
 
 

@@ -198,52 +198,52 @@ class Fountain:
       pygame.display.update()
     
 
-def JumpToRoom():
-  run = True
-  while run:
-    WIN.fill((202, 228, 241))
-    WIN.blit(cluedoBoard, (0,0))
 
-    if garage_button.draw() == True:
-      GarageDisplay = Garage()
-      GarageDisplay.run()
+run = True
+while run:
+  WIN.fill((202, 228, 241))
+  WIN.blit(cluedoBoard, (0,0))
 
-    if dining_button.draw() == True:
-      DiningDisplay = DiningRoom()
-      DiningDisplay.run()
+  if garage_button.draw() == True:
+    GarageDisplay = Garage()
+    GarageDisplay.run()
 
-    if bath_button.draw() == True:
-      BathDisplay = Bathroom()
-      BathDisplay.run()
+  if dining_button.draw() == True:
+    DiningDisplay = DiningRoom()
+    DiningDisplay.run()
 
-    if bed_button.draw() == True:
-      BedDisplay = Bedroom()
-      BedDisplay.run()
+  if bath_button.draw() == True:
+    BathDisplay = Bathroom()
+    BathDisplay.run()
 
-    if greenH_button.draw() == True:
-      GreenDisplay = GreenHouse()
-      GreenDisplay.run()
+  if bed_button.draw() == True:
+    BedDisplay = Bedroom()
+    BedDisplay.run()
 
-    if living_button.draw() == True:
-      livingDisplay = LivingRoom()
-      livingDisplay.run()
+  if greenH_button.draw() == True:
+    GreenDisplay = GreenHouse()
+    GreenDisplay.run()
 
-    if office_button.draw() == True:
-      officeDisplay = Office()
-      officeDisplay.run()
+  if living_button.draw() == True:
+    livingDisplay = LivingRoom()
+    livingDisplay.run()
 
-    if hall_button.draw() == True:
-      hallDisplay = Hallway()
-      hallDisplay.run()
+  if office_button.draw() == True:
+    officeDisplay = Office()
+    officeDisplay.run()
 
-    if fountain_button.draw() == True:
-      fountainDisplay = Fountain()
-      fountainDisplay.run()
+  if hall_button.draw() == True:
+    hallDisplay = Hallway()
+    hallDisplay.run()
 
-  for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-      run = False
-  pygame.display.update()
+  if fountain_button.draw() == True:
+    fountainDisplay = Fountain()
+    fountainDisplay.run()
+
+for event in pygame.event.get():
+  if event.type == pygame.QUIT:
+    run = False
+pygame.display.update()
 
 
 pygame.quit()
