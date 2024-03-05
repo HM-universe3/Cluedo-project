@@ -10,6 +10,7 @@ from Server import Client
 from Murderer_class import Murderer
 from Server import Server
 from Network import Network
+from JumpToRoomPowerUp import Button
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 HOST = "192.168.0.50"
 PORT = 55555
@@ -32,6 +33,30 @@ WIN = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Client")
 listOfColours = [(0, 255, 0), ()]
 clientNumber = 0
+mouse = pygame.mouse.get_pos()
+list_img = pygame.image.load("button_check-list.png").convert_alpha()
+back_img = pygame.image.load("button_go-back.png").convert_alpha()
+
+class CheckList:
+  def __init__(self):
+    self.checkListDisplay = pygame.image.load("Check sheet.png").convert_alpha()
+    self.checkListDisplay = pygame.transform.scale(self.checkListDisplay, (600, 600))
+    
+  def run(self):
+    run = True
+    while run:
+      WIN.fill((202, 228, 241))
+      WIN.blit(self.checkListDisplay, (0,0))
+      if goBackButton.draw() == True:
+          main()
+
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          run = False
+      pygame.display.update()
+
+checkListButton = Button(25, 525, list_img , 0.7)
+goBackButton = Button(75, 10, back_img, 0.7 )
 
 class Player():
   def __init__(self, x, y, width, height, colour, name):
@@ -147,6 +172,9 @@ def main():
     
   run = True
   while run:
+    if checkListButton.draw() == True:
+      checkListDisplay = CheckList()
+      checkListDisplay.run()
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         run = False
