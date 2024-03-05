@@ -48,15 +48,15 @@ class Button:
 
     
 #make buttons
-garage_button = Button(25, 525, garage_img, 0.7)
-dining_button = Button(20, 275, dining_img, 0.6)
-bath_button = Button(205, 60, bathroom_img, 0.6)
-bed_button = Button(25, 60, bedroom_img, 0.7)
-greenH_button = Button(430, 500, greenhouse_img, 0.7)
-living_button = Button(430, 275, living_img, 0.7)
-office_button = Button(430, 60, office_img, 0.7)
-hall_button = Button(20, 140, hall_img, 0.7)
-fountain_button = Button(235, 375, fountain_img, 0.7)
+#garage_button = Button(25, 525, garage_img, 0.7)
+#dining_button = Button(20, 275, dining_img, 0.6)
+#bath_button = Button(205, 60, bathroom_img, 0.6)
+#bed_button = Button(25, 60, bedroom_img, 0.7)
+#greenH_button = Button(430, 500, greenhouse_img, 0.7)
+#living_button = Button(430, 275, living_img, 0.7)
+#office_button = Button(430, 60, office_img, 0.7)
+#hall_button = Button(20, 140, hall_img, 0.7)
+#fountain_button = Button(235, 375, fountain_img, 0.7)
 
 class Garage:
   def __init__(self):
@@ -198,46 +198,47 @@ class Fountain:
       pygame.display.update()
     
 
-run = True
-while run:
-  WIN.fill((202, 228, 241))
-  WIN.blit(cluedoMap, (0,0))
+def JumpToRoom():
+  run = True
+  while run:
+    WIN.fill((202, 228, 241))
+    WIN.blit(cluedoBoard, (0,0))
 
-  if garage_button.draw() == True:
-    GarageDisplay = Garage()
-    GarageDisplay.run()
+    if garage_button.draw() == True:
+      GarageDisplay = Garage()
+      GarageDisplay.run()
 
-  if dining_button.draw() == True:
-    DiningDisplay = DiningRoom()
-    DiningDisplay.run()
+    if dining_button.draw() == True:
+      DiningDisplay = DiningRoom()
+      DiningDisplay.run()
 
-  if bath_button.draw() == True:
-    BathDisplay = Bathroom()
-    BathDisplay.run()
+    if bath_button.draw() == True:
+      BathDisplay = Bathroom()
+      BathDisplay.run()
 
-  if bed_button.draw() == True:
-    BedDisplay = Bedroom()
-    BedDisplay.run()
-  
-  if greenH_button.draw() == True:
-    GreenDisplay = GreenHouse()
-    GreenDisplay.run()
+    if bed_button.draw() == True:
+      BedDisplay = Bedroom()
+      BedDisplay.run()
 
-  if living_button.draw() == True:
-    livingDisplay = LivingRoom()
-    livingDisplay.run()
+    if greenH_button.draw() == True:
+      GreenDisplay = GreenHouse()
+      GreenDisplay.run()
 
-  if office_button.draw() == True:
-    officeDisplay = Office()
-    officeDisplay.run()
+    if living_button.draw() == True:
+      livingDisplay = LivingRoom()
+      livingDisplay.run()
 
-  if hall_button.draw() == True:
-    hallDisplay = Hallway()
-    hallDisplay.run()
-  
-  if fountain_button.draw() == True:
-    fountainDisplay = Fountain()
-    fountainDisplay.run()
+    if office_button.draw() == True:
+      officeDisplay = Office()
+      officeDisplay.run()
+
+    if hall_button.draw() == True:
+      hallDisplay = Hallway()
+      hallDisplay.run()
+
+    if fountain_button.draw() == True:
+      fountainDisplay = Fountain()
+      fountainDisplay.run()
 
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
