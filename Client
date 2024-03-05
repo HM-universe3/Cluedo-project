@@ -10,7 +10,7 @@ from Server import Client, ServerClass
 from Murderer_class import Murderer
 from Network import Network
 from JumpToRoomPowerUp import Button
-from JumpToRoomPowerUp import Garage, DiningRoom, Bedroom, Hallway, Office, Bathroom, LivingRoom, GreenHouse, Fountain, JumpToRoom
+#from JumpToRoomPowerUp import Garage, DiningRoom, Bedroom, Hallway, Office, Bathroom, LivingRoom, GreenHouse, Fountain, 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 HOST = "192.168.0.50"
@@ -54,18 +54,18 @@ class CheckList:
           run = False
       pygame.display.update()
 
-class buttonForJump:
-  def run(self):
-    run = True
-    while run:
-      WIN.fill((202, 228, 241))
-      JumpToRoom()
+# class buttonForJump:
+#   def run(self):
+#     run = True
+#     while run:
+#       WIN.fill((202, 228, 241))
+#       JumpToRoom()
       
 
-      for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-          run = False
-      pygame.display.update()
+#       for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#           run = False
+#       pygame.display.update()
 
 
 #button images
@@ -80,13 +80,13 @@ hall_img = pygame.image.load("button_hallway.png").convert_alpha()
 fountain_img = pygame.image.load("button_fountain.png").convert_alpha()
 list_img = pygame.image.load("button_check-list.png").convert_alpha()
 back_img = pygame.image.load("button_go-back.png").convert_alpha()
-jumpToRoom = pygame.image.load("button_jump-to-room.png").convert_alpha()
+#jumpToRoom = pygame.image.load("button_jump-to-room.png").convert_alpha()
 
 
 #the buttons
 checkListButton = Button(25, 525, list_img , 0.7)
 goBackButton = Button(75, 10, back_img, 0.7 )
-jumpToRoomButton = Button(430, 525, jumpToRoom, 0.7)
+#jumpToRoomButton = Button(430, 525, jumpToRoom, 0.7)
 garage_button = Button(25, 525, garage_img, 0.7)
 dining_button = Button(20, 275, dining_img, 0.6)
 bath_button = Button(205, 60, bathroom_img, 0.6)
@@ -178,6 +178,7 @@ roomList = ["Garage", "Dining Room", "Bathroom", "Conservatory", "Bedroom", "Stu
 weaponList = ["Lead Pipe", "Rope", "Candlestick", "Revolver", "Spanner", "Dagger"]
 
 socketForServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serverAddress = ("", PORT)
 socketForServer.connect((HOST, PORT))
 socketForServer.listen()
 conn, addr = socketForServer.accept()
@@ -210,10 +211,6 @@ def main():
     if checkListButton.draw() == True:
       checkListDisplay = CheckList()
       checkListDisplay.run()
-
-    if jumpToRoomButton.draw() == True:
-      jumpToRoomDisplay = buttonForJump()
-      jumpToRoomDisplay.run()
 
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
