@@ -35,9 +35,6 @@ pygame.display.set_caption("Client")
 listOfColours = [(0, 255, 0), ()]
 clientNumber = 0
 mouse = pygame.mouse.get_pos()
-list_img = pygame.image.load("button_check-list.png").convert_alpha()
-back_img = pygame.image.load("button_go-back.png").convert_alpha()
-jumpToRoom = pygame.image.load("button_jump-to-room.png").convert_alpha()
 
 class CheckList:
   def __init__(self):
@@ -70,6 +67,23 @@ class buttonForJump:
           run = False
       pygame.display.update()
 
+
+#button images
+garage_img = pygame.image.load("garage_button.png").convert_alpha()
+dining_img = pygame.image.load("button_dining-room.png").convert_alpha()
+bathroom_img = pygame.image.load("button_bathroom.png").convert_alpha()
+bedroom_img = pygame.image.load("button_bedroom.png").convert_alpha()
+greenhouse_img = pygame.image.load("button_greenhouse.png").convert_alpha()
+living_img = pygame.image.load("button_living-room.png").convert_alpha()
+office_img = pygame.image.load("button_office.png").convert_alpha()
+hall_img = pygame.image.load("button_hallway.png").convert_alpha()
+fountain_img = pygame.image.load("button_fountain.png").convert_alpha()
+list_img = pygame.image.load("button_check-list.png").convert_alpha()
+back_img = pygame.image.load("button_go-back.png").convert_alpha()
+jumpToRoom = pygame.image.load("button_jump-to-room.png").convert_alpha()
+
+
+#the buttons
 checkListButton = Button(25, 525, list_img , 0.7)
 goBackButton = Button(75, 10, back_img, 0.7 )
 jumpToRoomButton = Button(430, 525, jumpToRoom, 0.7)
@@ -151,9 +165,6 @@ class Card(Player):
     pygame.draw.rect(WIN, self.colour, self.rect)
     
     
-
-
-#MainBackground = pygame.image.load("Fountain image.png")
 
 def redrawWindow(WIN, player):
   MainBackground = pygame.image.load("Fountain image.png")

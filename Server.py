@@ -18,7 +18,7 @@ class Server:
         while True:
             try:
                 #this receives the data from the client
-                data = conn.recv(2048) #larger the size, longer it takes to recieve 
+                data = conn.recv(1048) #larger the size, longer it takes to recieve 
 
                 if not data:
                     print("Disconnected")
