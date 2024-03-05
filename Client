@@ -11,6 +11,7 @@ from Murderer_class import Murderer
 from Server import Server
 from Network import Network
 from JumpToRoomPowerUp import Button
+from JumpToRoomPowerUp import Garage, DiningRoom, Bedroom, Hallway, Office, Bathroom, LivingRoom, GreenHouse, Fountain, JumpToRoom
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 HOST = "192.168.0.50"
 PORT = 55555
@@ -36,6 +37,7 @@ clientNumber = 0
 mouse = pygame.mouse.get_pos()
 list_img = pygame.image.load("button_check-list.png").convert_alpha()
 back_img = pygame.image.load("button_go-back.png").convert_alpha()
+jumpToRoom = pygame.image.load("button_jump-to-room.png").convert_alpha()
 
 class CheckList:
   def __init__(self):
@@ -55,8 +57,31 @@ class CheckList:
           run = False
       pygame.display.update()
 
+class buttonForJump:
+  def run(self):
+    run = True
+    while run:
+      WIN.fill((202, 228, 241))
+      JumpToRoom()
+      
+
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          run = False
+      pygame.display.update()
+
 checkListButton = Button(25, 525, list_img , 0.7)
 goBackButton = Button(75, 10, back_img, 0.7 )
+jumpToRoomButton = Button(430, 525, jumpToRoom, 0.7)
+garage_button = Button(25, 525, garage_img, 0.7)
+dining_button = Button(20, 275, dining_img, 0.6)
+bath_button = Button(205, 60, bathroom_img, 0.6)
+bed_button = Button(25, 60, bedroom_img, 0.7)
+greenH_button = Button(430, 500, greenhouse_img, 0.7)
+living_button = Button(430, 275, living_img, 0.7)
+office_button = Button(430, 60, office_img, 0.7)
+hall_button = Button(20, 140, hall_img, 0.7)
+fountain_button = Button(235, 375, fountain_img, 0.7)
 
 class Player():
   def __init__(self, x, y, width, height, colour, name):
@@ -175,10 +200,15 @@ def main():
     if checkListButton.draw() == True:
       checkListDisplay = CheckList()
       checkListDisplay.run()
+
+    if jumpToRoomButton.draw() == True:
+      jumpToRoomDisplay = buttonForJump()
+      jumpToRoomDisplay.run()
+
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         run = False
-        pygame.quit()
+
     p.move()
     client.sendPosition()
     otherPlayersPositions = client.receivePositions()
