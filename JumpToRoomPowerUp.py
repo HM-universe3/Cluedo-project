@@ -48,15 +48,15 @@ class Button:
 
     
 #make buttons
-#garage_button = Button(25, 525, garage_img, 0.7)
-#dining_button = Button(20, 275, dining_img, 0.6)
-#bath_button = Button(205, 60, bathroom_img, 0.6)
-#bed_button = Button(25, 60, bedroom_img, 0.7)
-#greenH_button = Button(430, 500, greenhouse_img, 0.7)
-#living_button = Button(430, 275, living_img, 0.7)
-#office_button = Button(430, 60, office_img, 0.7)
-#hall_button = Button(20, 140, hall_img, 0.7)
-#fountain_button = Button(235, 375, fountain_img, 0.7)
+garage_button = Button(25, 525, garage_img, 0.7)
+dining_button = Button(20, 275, dining_img, 0.6)
+bath_button = Button(205, 60, bathroom_img, 0.6)
+bed_button = Button(25, 60, bedroom_img, 0.7)
+greenH_button = Button(430, 500, greenhouse_img, 0.7)
+living_button = Button(430, 275, living_img, 0.7)
+office_button = Button(430, 60, office_img, 0.7)
+hall_button = Button(20, 140, hall_img, 0.7)
+fountain_button = Button(235, 375, fountain_img, 0.7)
 
 class Garage:
   def __init__(self):

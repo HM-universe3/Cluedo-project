@@ -3,15 +3,15 @@ from pygame.locals import Rect
 import random
 import socket
 from _thread import *
-import threading
+from threading import *
 import sys
 import pickle
-from Server import Client
+from Server import Client, ServerClass
 from Murderer_class import Murderer
-from Server import Server
 from Network import Network
 from JumpToRoomPowerUp import Button
 from JumpToRoomPowerUp import Garage, DiningRoom, Bedroom, Hallway, Office, Bathroom, LivingRoom, GreenHouse, Fountain, JumpToRoom
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 HOST = "192.168.0.50"
 PORT = 55555
@@ -178,8 +178,7 @@ roomList = ["Garage", "Dining Room", "Bathroom", "Conservatory", "Bedroom", "Stu
 weaponList = ["Lead Pipe", "Rope", "Candlestick", "Revolver", "Spanner", "Dagger"]
 
 def main():
-  client = Client()
-  client.connect()
+
   p = Player(50, 50, 50, 50, random.choice(listOfColours), "Player 1")
   cardsNotFound = []
   cardObjects = []
@@ -208,6 +207,11 @@ def main():
     
   run = True
   while run:
+    client = Client()
+    ServerClass.threaded_client(conn)
+    ServerClass.server()
+    client.connect()
+    client.sendPosition()
     if checkListButton.draw() == True:
       checkListDisplay = CheckList()
       checkListDisplay.run()
@@ -225,10 +229,6 @@ def main():
     otherPlayersPositions = client.receivePositions()
     for playerPosition in otherPlayersPositions:
       p.updatePosition(playerPosition)
-    #if p.self.x < 0 or p.self.x > width - p.self.rect or p.self.y < 0 or p.self.y > height - p.self.rect:
-      #WIN.
-      #need to find background x and y values and speed and then use background x - background speed to update it as the player hits the edge of the screen
-      #pass
     Fountain = Card("Fountain")
     Fountain.draw(WIN)
     redrawWindow(WIN, p)

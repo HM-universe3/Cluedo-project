@@ -1,8 +1,6 @@
 import socket
 from _thread import *
 import threading
-import sys
-import pickle
 from Network import Network
 
 HOST = "192.168.0.50"
@@ -10,51 +8,58 @@ PORT = 55555
 
 clients = [] 
 
-class Server:
+import socket
+import threading
 
-    def threaded_client(conn): #runs in background
+class ServerClass:
+    clients = []
+
+    @staticmethod
+    def threaded_client(conn): 
         conn.send(str.encode("Connected"))
     
         while True:
             try:
-                #this receives the data from the client
-                data = conn.recv(1048) #larger the size, longer it takes to recieve 
+                data = conn.recv(1024) 
 
                 if not data:
                     print("Disconnected")
                     break
             
-                for client in clients:
+                for client in ServerClass.clients:
                     if client != conn:
                         try:
                             client.send(data)
                         except:
-                            clients.remove(client)
+                            ServerClass.clients.remove(client)
             except:
                 break
     
-        clients.remove(conn)
+        ServerClass.clients.remove(conn)
         print("Lost connection")
         conn.close()
 
-
-    def server(threaded_client):
+    @staticmethod
+    def server():
+        HOST = "192.168.0.50"
+        PORT = 55555
         socketForServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         socketForServer.bind((HOST, PORT))
         socketForServer.listen()
 
-        while True: #continuously listens for connections
-            conn, addr = socketForServer.accept(conn, addr) #accepts incoming connections
-            clients.append(conn)
+        print("Server is listening...")
+
+        while True: 
+            conn, addr = socketForServer.accept() 
+            ServerClass.clients.append(conn)
             print("Connected to:", addr)
 
-            #need to start a new thread for each client that's connected
-            clientHandler = threading.Thread(target=threaded_client, args=(conn,))
+            clientHandler = threading.Thread(target=ServerClass.threaded_client, args=(conn,))
             clientHandler.start()
 
+if __name__ == "__main__":
+    ServerClass.server()
 
-    if __name__ == "__main__":
-        server()
 
 class Client:
     def __init__(self):
@@ -66,16 +71,15 @@ class Client:
 
     def connect(self):
         self.clientSocket.connect(self.address)
-        #this receives inital data from the server when it connects
-        print(self.clien_socket.recv(2048).decode())
+        print(self.clientSocket.recv(2048).decode())
 
     def sendPosition(self):
         if self.player:
-            self.player.send_position(self.client_socket)
+            self.player.send_position(self.clientSocket)
         
     def receivePositions(self):
         if self.player:
-            return self.player.receive_position(self.client_socket)
+            return self.player.receive_position(self.clientSocket)
     
     def close(self):
         self.clientSocket.close()
